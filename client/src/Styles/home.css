@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    /* background-color: aliceblue; */
+}
+
+body{
+    background-color:aliceblue;
+}
+
+.main-containerHome{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.features{
+    /* border: 2px solid black; */
+    width: 700px;
+    /* height: 300px; */
+    margin: 2rem 0;
+    transition: ease all .5s;
+}
+
+.features img{
+    padding: 1rem;
+}
+
+
+.title{
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 0 4rem;
+    margin-bottom: 1rem;
+        transition: ease all .5s;
+}
+
+.description{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.startBtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 20px;
+        background-color: aquamarine;
+}
+
+.startBtn button{
+    width: 100%;
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+        transition: ease-in all 0.5s;
+}
+
+
+@media (max-width: 700px){
+    .features {
+            width: 100%;
+        }
+    .startBtn button {
+        font-size: medium;
+    }
+    .title {
+        font-size: 1.6rem;
+    }
+
+}
