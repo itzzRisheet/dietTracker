@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 import { MongoMemoryServer } from "mongodb-memory-server";
-import env from "./config.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function connect() {
   // to create new mongoDB server instance whenever you start server
@@ -12,7 +13,7 @@ async function connect() {
   // const db = await mongoose.connect(getURI);
 
   await mongoose
-    .connect(env.MONGO_URI)
+    .connect(process.env.MONGO_URI)
     .then((db) => {
       console.log("database Connected...");
       return db;
