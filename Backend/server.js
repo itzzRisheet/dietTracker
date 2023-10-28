@@ -7,7 +7,13 @@ import router from "./routes/route.js";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://diet-tracker-server.vercel.app/"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 app.use(morgan("tiny")); // HTTP request logger middleware for node.js
 app.disable("x-powered-by");
 app.use("/api", router); // now all routes will goes by prefix '''/api'''
