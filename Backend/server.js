@@ -22,7 +22,7 @@ const PORT = 8080 || process.env.PORT;
 
 // HTTP get request
 app.get("/", (req, res) => {
-  res.status(201).json({ msg: "Home GET request success" });
+  res.status(201).json("hello world");
 });
 
 // start server only when we have valid connection
