@@ -36,8 +36,8 @@ function Register() {
         })
         .catch((err) => {
           toast.remove(toastID);
-          const msg = err.error.response.data.msg;
-          toast.error(msg);
+          // const msg = err.error.response.data.msg;
+          console.log(err);
         });
     },
   });

@@ -1,10 +1,15 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+// import dotenv from "dotenv";
+// dotenv.config({
+//   path: "../.env",
+// });
+
 // Make api requests
 
-axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
-// axios.defaults.baseURL = "http://localhost:8080";
+// axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
+axios.defaults.baseURL = "http://localhost:8080";
 
 // To get username from Token
 export async function getUsername() {
@@ -38,6 +43,7 @@ export async function getUser({ username }) {
 // register the user
 export async function registerUser(credentials) {
   try {
+    console.log(axios.defaults.baseURL);
     const {
       data: { msg },
       status,

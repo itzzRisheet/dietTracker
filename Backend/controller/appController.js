@@ -31,6 +31,7 @@ export async function verifyUSER(req, res, next) {
 export async function register(req, res) {
   try {
     const { username, password, profile, email } = req.body;
+    console.log(username);
 
     const userPromise = new Promise(async (resolve, reject) => {
       try {
