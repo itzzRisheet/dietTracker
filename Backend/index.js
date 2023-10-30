@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://diet-tracker-server.vercel.app/"],
+    origin: ["https://diet-tracker-client.vercel.app/"],
     methods: ["GET", "POST"],
     credentials: true,
   })
