@@ -125,7 +125,7 @@ export async function login(req, res) {
                 username: user.username,
               },
               process.env.JWT_SECRET,
-              { expiresIn: "24h" }
+              { expiresIn: "4000ms" }
             );
 
             return res.status(200).send({

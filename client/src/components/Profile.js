@@ -13,6 +13,7 @@ import { updateUser } from "../helper/helper";
 
 function Profile() {
   const [File, setFile] = useState();
+  const [updateStatus, setupdateStatus] = useState(false);
 
   const navigate = useNavigate();
 
@@ -42,6 +43,10 @@ function Profile() {
         success: <b> User Updated Successfully...</b>,
         error: <b> Can't update user</b>,
       });
+
+      // updatePromise.then((data) => {
+      //   console.log(data);
+      // });
     },
   });
 

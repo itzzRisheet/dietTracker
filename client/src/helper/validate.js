@@ -82,7 +82,6 @@ function emailVerify(error = {}, values) {
   } else if (!mail.test(values.email)) {
     error.email = toast.error("Invalid Email...!!");
   }
-
   return error;
 }
 
