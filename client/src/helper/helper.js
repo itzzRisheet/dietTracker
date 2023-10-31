@@ -4,7 +4,8 @@ import jwtDecode from "jwt-decode";
 // Make api requests
 const axiosConfig = axios.create({
   // baseURL: "https://diet-tracker-server.vercel.app",
-  baseURL: "http://localhost:8080",
+  // baseURL: "http://localhost:8080",
+  baseURL: "https://diet-tracker-api.onrender.com/",
   timeout: 5000,
 });
 
