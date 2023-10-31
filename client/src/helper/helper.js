@@ -3,14 +3,9 @@ import jwtDecode from "jwt-decode";
 
 // Make api requests
 const axiosConfig = axios.create({
-  // baseURL: "https://diet-tracker-server.vercel.app",
-  // baseURL: "http://localhost:8080",
-  baseURL: "https://diet-tracker-api.onrender.com/",
+  baseURL: process.env.REACT_APP_BASEURL,
   timeout: 5000,
 });
-
-// axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
-// axios.defaults.baseURL = "http://localhost:8080";
 
 // To get username from Token
 export async function getUsername() {
@@ -57,19 +52,13 @@ export async function registerUser(credentials) {
     const {
       data: { msg },
       status,
-    } = await axiosConfig
-      .post(`/api/register`, credentials, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((d) => {
-        console.log(d);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    } = await axiosConfig.post(`/api/register`, credentials, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
     let { username, email } = credentials;
 
     // send email

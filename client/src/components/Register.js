@@ -28,16 +28,17 @@ function Register() {
       values = await Object.assign(values, { profile: File });
 
       const toastID = toast.loading("Creating...");
-      registerUser(values)
+      await registerUser(values)
         .then(() => {
-          toast.remove(toastID);
           toast.success("User registered successfully");
+          toast.remove(toastID);
           navigate("/loginPage");
         })
         .catch((err) => {
           toast.remove(toastID);
-          // const msg = err.error.response.data.msg;
-          // console.log(err);
+          console.log(err);
+          const msg = err.error.response.data.msg;
+          toast.error(msg);
         });
     },
   });
