@@ -6,12 +6,18 @@ import router from "./routes/route.js";
 
 const app = express();
 
+const origins = [
+  "https://diet-tracker-client.vercel.app/",
+  "http://localhost:3000/",
+];
+
 app.use(express.json());
+// app.use(cors());
 app.use(
   cors({
-    origin: ["https://diet-tracker-client.vercel.app/"],
-    methods: ["GET", "POST"],
-    credentials: true,
+    origin: "https://diet-tracker-client.vercel.app/",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(morgan("tiny")); // HTTP request logger middleware for node.js

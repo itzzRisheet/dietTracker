@@ -3,7 +3,8 @@ import jwtDecode from "jwt-decode";
 
 // Make api requests
 const axiosConfig = axios.create({
-  baseURL: "https://diet-tracker-server.vercel.app",
+  // baseURL: "https://diet-tracker-server.vercel.app",
+  baseURL: "http://localhost:8080",
   timeout: 5000,
 });
 
@@ -55,9 +56,19 @@ export async function registerUser(credentials) {
     const {
       data: { msg },
       status,
-    } = await axiosConfig.post(`/api/register`, credentials, {
-      headers: { "Content-Type": "application/json" },
-    });
+    } = await axiosConfig
+      .post(`/api/register`, credentials, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((d) => {
+        console.log(d);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     let { username, email } = credentials;
 
     // send email
