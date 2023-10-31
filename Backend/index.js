@@ -12,14 +12,14 @@ const origins = [
 ];
 
 const corsConfig = {
-  origin: origins,
+  // origin: origins,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(express.json());
 // app.use(cors());
-app.use(cors());
+app.use(cors(corsConfig));
 app.use(morgan("tiny")); // HTTP request logger middleware for node.js
 app.disable("x-powered-by");
 app.use("/api", router); // now all routes will goes by prefix '''/api'''
