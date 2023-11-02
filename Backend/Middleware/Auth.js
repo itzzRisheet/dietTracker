@@ -6,10 +6,9 @@ export default async function auth(req, res, next) {
     // access authorize header to validate request
     // so we have to first login and create user token and
     // that token will be passed while PUT request in "AUTH Bearer" at "Bearer Token"
+
     const token = req.headers.authorization.split(" ")[1];
-
     const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
-
     req.user = decodedToken;
 
     next();
@@ -18,7 +17,7 @@ export default async function auth(req, res, next) {
   } catch (error) {
     res.status(401).json({
       error: error,
-      msg: "Authentication failed",
+      msg: "Authentication failed in auth.js",
     });
   }
 }

@@ -37,7 +37,6 @@ function Profile() {
       });
 
       let updatePromise = updateUser(values);
-      console.log(values);
       toast.promise(updatePromise, {
         loading: "Updating...",
         success: <b> User Updated Successfully...</b>,

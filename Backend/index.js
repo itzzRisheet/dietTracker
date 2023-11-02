@@ -12,14 +12,27 @@ const origins = [
 ];
 
 const corsConfig = {
-  // origin: origins,
+  origin: origins,
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Access-Control-Allow-Origin",
+  ],
 };
 
 app.use(express.json());
-// app.use(cors());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000"]);
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", [
+    "Content-Type",
+    "Authorization",
+  ]);
+  next();
+});
 app.use(cors(corsConfig));
+
 app.use(morgan("tiny")); // HTTP request logger middleware for node.js
 app.disable("x-powered-by");
 app.use("/api", router); // now all routes will goes by prefix '''/api'''

@@ -125,7 +125,7 @@ export async function login(req, res) {
                 username: user.username,
               },
               process.env.JWT_SECRET,
-              { expiresIn: "4000ms" }
+              { expiresIn: "24h" }
             );
 
             return res.status(200).send({
@@ -193,7 +193,6 @@ export async function updateUser(req, res) {
   try {
     // const id = req.query.id;
     const { userID } = req.user;
-
     if (userID) {
       const body = req.body;
 

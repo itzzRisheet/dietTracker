@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound";
 import Password from "./components/Password";
 import Profile from "./components/Profile";
@@ -16,117 +16,113 @@ import Navbar from "./components/navbar";
 import Features from "./components/Features";
 import ContactUs from "./components/contactUs";
 import DietUI from "./components/DietUI";
+import Layout from "./layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        {" "}
-        <Navbar />
-        <Home />
+        <Layout />
       </>
     ),
-  },
-  {
-    path: "/loginPage",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <Username />
-      </>
-    ),
-  },
-  {
-    path: "/register",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <Register />
-      </>
-    ),
-  },
-  {
-    path: "/Reset",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <Reset />
-      </>
-    ),
-  },
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/loginPage",
+        element: (
+          <>
+            {" "}
+            <Username />
+          </>
+        ),
+      },
+      {
+        path: "/register",
+        element: (
+          <>
+            {" "}
+            <Register />
+          </>
+        ),
+      },
+      {
+        path: "/Reset",
+        element: (
+          <>
+            {" "}
+            <Reset />
+          </>
+        ),
+      },
 
-  {
-    path: "/recovery",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <Recovery />
-      </>
-    ),
-  },
-  {
-    path: "/profile",
-    element: (
-      <AuthorizeUser>
-        {" "}
-        <Navbar />
-        <Profile />
-      </AuthorizeUser>
-    ),
-  },
-  {
-    path: "/password",
-    element: (
-      <ProtectRoute>
-        {" "}
-        <Navbar />
-        <Password />
-      </ProtectRoute>
-    ),
-  },
-  {
-    path: "*",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <PageNotFound />
-      </>
-    ),
-  },
-  {
-    path: "/features",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <Features />
-      </>
-    ),
-  },
-  {
-    path: "/contact-us",
-    element: (
-      <>
-        {" "}
-        <Navbar />
-        <ContactUs />
-      </>
-    ),
-  },
-  {
-    path: "/dietUI",
-    element: (
-      <>
-        {" "}
-        <DietUI />
-      </>
-    ),
+      {
+        path: "/recovery",
+        element: (
+          <>
+            {" "}
+            <Recovery />
+          </>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <AuthorizeUser>
+            {" "}
+            <Profile />
+          </AuthorizeUser>
+        ),
+      },
+      {
+        path: "/password",
+        element: (
+          <ProtectRoute>
+            {" "}
+            <Password />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: "*",
+        element: (
+          <>
+            {" "}
+            <PageNotFound />
+          </>
+        ),
+      },
+      {
+        path: "/features",
+        element: (
+          <>
+            {" "}
+            <Features />
+          </>
+        ),
+      },
+      {
+        path: "/contact-us",
+        element: (
+          <>
+            {" "}
+            <ContactUs />
+          </>
+        ),
+      },
+      {
+        path: "/dietUI",
+        element: (
+          <>
+            {" "}
+            <DietUI />
+          </>
+        ),
+      },
+    ],
   },
 ]);
 

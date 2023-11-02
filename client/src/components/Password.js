@@ -37,11 +37,18 @@ function Password() {
         password: values.password,
       });
 
-      toast.promise(loginPromise, {
-        loading: "Checking...",
-        success: <b> Login successfully...</b>,
-        error: <b> Incorrect Password </b>,
-      });
+      const toastID = toast.loading("verifying...");
+      await loginPromise
+        .then(() => {
+          toast.success("Logged in successfully", { duration: 2000 });
+          toast.remove(toastID);
+        })
+        .catch((err) => {
+          toast.remove(toastID);
+          console.log(err);
+          const msg = err.error;
+          toast.error(msg);
+        });
 
       loginPromise.then((res) => {
         let { token } = res.data;

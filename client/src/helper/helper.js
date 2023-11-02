@@ -4,7 +4,6 @@ import jwtDecode from "jwt-decode";
 // Make api requests
 const axiosConfig = axios.create({
   baseURL: process.env.REACT_APP_BASEURL,
-  timeout: 5000,
 });
 
 // To get username from Token
@@ -118,7 +117,7 @@ export async function updateUser(response) {
     });
     return Promise.resolve({ data });
   } catch (error) {
-    return Promise.reject({ error: "Couldn't update Profile" });
+    return Promise.reject({ err: "Couldn't update Profile", error: error });
   }
 }
 
