@@ -54,7 +54,6 @@ function Password() {
         let { token } = res.data;
         localStorage.setItem("token", token);
         navigate("/");
-        window.location.reload(false);
       });
     },
   });
