@@ -17,7 +17,10 @@ app.use(express.json());
 // });
 app.use(
   cors({
-    origin: ["http://temp.com", "http://localhost:3000"],
+    origin: [
+      "https://diet-tracker-client.onrender.com",
+      "http://localhost:3000",
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: [
       "Content-Type",
