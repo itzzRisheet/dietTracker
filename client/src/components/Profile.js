@@ -66,8 +66,8 @@ function Profile() {
 
   function userLogout() {
     localStorage.removeItem("token");
-    window.location.reload(false);
     navigate("/");
+    window.location.reload(false);
   }
 
   if (isLoading) return <h1 className="text-2xl font-bold">isLoading</h1>;
