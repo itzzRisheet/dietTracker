@@ -66,6 +66,7 @@ function Profile() {
 
   function userLogout() {
     localStorage.removeItem("token");
+    window.location.reload(false);
     navigate("/");
   }
 

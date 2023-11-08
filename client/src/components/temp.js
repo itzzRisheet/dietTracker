@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./temp.css";
 
-function temp() {
+function Temp() {
+  const [count, setCount] = useState(0);
+
   return (
     <div className="Container">
       <div className="cont">
-        <div className="box">1</div>
-        <div className="box">2</div>
+        <p>Hello world</p>
       </div>
     </div>
   );
 }
 
-export default temp;
+export default Temp;

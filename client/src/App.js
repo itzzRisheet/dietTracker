@@ -12,7 +12,6 @@ import Temp from "./components/temp";
 import Home from "./components/Home";
 
 import { AuthorizeUser, ProtectRoute } from "./middleware/auth";
-import Navbar from "./components/navbar";
 import Features from "./components/Features";
 import ContactUs from "./components/contactUs";
 import DietUI from "./components/DietUI";
@@ -119,6 +118,15 @@ const router = createBrowserRouter([
           <>
             {" "}
             <DietUI />
+          </>
+        ),
+      },
+      {
+        path: "/temp",
+        element: (
+          <>
+            {" "}
+            <Temp />
           </>
         ),
       },

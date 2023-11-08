@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/store";
 import Avatar from "react-avatar";
 import avatarImg from "../assests/avatar.png";
 import Person2Icon from "@mui/icons-material/Person2";
+import useLocalstorage from "../hooks/localStorage.hooks";
 
 function CustomLink({ href, children, ...props }) {
   const path = window.location.pathname;
@@ -19,20 +20,9 @@ function CustomLink({ href, children, ...props }) {
 
 function Navbar() {
   const [menuOpen, setmenuOpen] = useState(false);
-  var { profile } = useAuthStore((state) => state.auth);
 
-  var loginRef = useRef();
-
-  var [loginStatus, setLoginStatue] = useState(false);
-
-  useEffect(() => {
-    setLoginStatue(localStorage.getItem("token") ? true : false);
-    if (loginStatus) {
-      loginRef.current = "logout";
-    } else {
-      loginRef.current = "login";
-    }
-  }, [loginStatus, profile]);
+  const { profile } = useAuthStore((state) => state.auth);
+  const [loginStatus] = useLocalstorage();
 
   return (
     <nav className="nav">
@@ -52,10 +42,7 @@ function Navbar() {
       </div>
 
       <ul className={menuOpen ? "open" : ""}>
-        <CustomLink
-          href={loginStatus ? "/profile" : "/loginPage"}
-          ref={loginRef}
-        >
+        <CustomLink href={loginStatus ? "/profile" : "/loginPage"}>
           {loginStatus ? (
             <Avatar
               className="profile_img"

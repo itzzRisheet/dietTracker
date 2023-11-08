@@ -53,6 +53,7 @@ function Password() {
       loginPromise.then((res) => {
         let { token } = res.data;
         localStorage.setItem("token", token);
+        window.location.reload(false);
         navigate("/");
       });
     },

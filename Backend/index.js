@@ -6,34 +6,26 @@ import router from "./routes/route.js";
 
 const app = express();
 
-const origins = [
-  "https://diet-tracker-client.vercel.app/",
-  "http://localhost:3000/",
-];
-
-const corsConfig = {
-  origin: origins,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Access-Control-Allow-Origin",
-  ],
-};
-
 app.use(express.json());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", [
-    "https://diet-tracker-client.onrender.com",
-  ]);
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-  res.setHeader("Access-Control-Allow-Headers", [
-    "Content-Type",
-    "Authorization",
-  ]);
-  next();
-});
-app.use(cors(corsConfig));
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
+//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+//   res.setHeader("Access-Control-Allow-Headers", [
+//     "Content-Type",
+//     "Authorization",
+//   ]);
+// });
+app.use(
+  cors({
+    origin: ["http://temp.com", "http://localhost:3000"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+    ],
+  })
+);
 
 app.use(morgan("tiny")); // HTTP request logger middleware for node.js
 app.disable("x-powered-by");
