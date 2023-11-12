@@ -16,3 +16,14 @@ export const useAuthStore = create((set) => ({
     set((state) => ({ auth: { ...state.auth, profile: profile } }));
   },
 }));
+
+export const useLocalStorage = create((set) => ({
+  tokenData: {
+    token: false,
+  },
+  setToken: () => {
+    set((state) => ({
+      tokenData: { token: localStorage.getItem("token") ? true : false },
+    }));
+  },
+}));

@@ -10,11 +10,12 @@ import { profileValidation } from "../helper/validate";
 import convert from "../helper/imageConverter";
 import useFetch from "../hooks/fetch.hooks";
 import { updateUser } from "../helper/helper";
+import { useLocalStorage } from "../store/store";
 
 function Profile() {
   const [File, setFile] = useState();
   const [updateStatus, setupdateStatus] = useState(false);
-
+  const setToken = useLocalStorage((state) => state.setToken);
   const navigate = useNavigate();
 
   const [{ isLoading, apiData, serverError }] = useFetch();
@@ -66,7 +67,7 @@ function Profile() {
 
   function userLogout() {
     localStorage.removeItem("token");
-    window.location.reload(false);
+    setToken((token) => false);
     navigate("/");
   }
 

@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import "../Styles/nav.css";
 import { Link } from "react-router-dom";
-import { useAuthStore } from "../store/store";
+import { useAuthStore, useLocalStorage } from "../store/store";
 import Avatar from "react-avatar";
 import avatarImg from "../assests/avatar.png";
 import Person2Icon from "@mui/icons-material/Person2";
-import useLocalstorage from "../hooks/localStorage.hooks";
 
 function CustomLink({ href, children, ...props }) {
   const path = window.location.pathname;
@@ -20,9 +19,16 @@ function CustomLink({ href, children, ...props }) {
 
 function Navbar() {
   const [menuOpen, setmenuOpen] = useState(false);
-
+  const { token } = useLocalStorage((state) => state.tokenData);
   const { profile } = useAuthStore((state) => state.auth);
-  const [loginStatus] = useLocalstorage();
+  const [loginStatus, setLoginStatus] = useState(
+    localStorage.getItem("token") ? true : false
+  );
+
+  useEffect(() => {
+    console.log(token);
+    setLoginStatus(token);
+  }, [token]);
 
   return (
     <nav className="nav">
