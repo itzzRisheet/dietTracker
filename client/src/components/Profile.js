@@ -67,7 +67,10 @@ function Profile() {
 
   function userLogout() {
     localStorage.removeItem("token");
+<<<<<<< HEAD
     setToken((token) => false);
+=======
+>>>>>>> fb4e43cfc51b3f4072138600997cd6046fc1544e
     navigate("/");
   }
 
