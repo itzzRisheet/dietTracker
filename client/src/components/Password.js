@@ -54,10 +54,7 @@ function Password() {
       loginPromise.then((res) => {
         let { token } = res.data;
         localStorage.setItem("token", token);
-<<<<<<< HEAD
         setToken((token) => true);
-=======
->>>>>>> fb4e43cfc51b3f4072138600997cd6046fc1544e
         navigate("/");
       });
     },
