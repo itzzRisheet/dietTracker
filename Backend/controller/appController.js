@@ -242,7 +242,7 @@ export async function verifyOTP(req, res) {
 
 export async function createResetSession(req, res) {
   if (req.app.locals.resetSession) {
-    req.app.locals.resetSession = false; // allow access to this route only once
+    // req.app.locals.resetSession = false; // allow access to this route only once
     return res.status(201).send({ flag: req.app.locals.resetSession });
   }
   return res.status(440).send({ error: "Session expired" });
@@ -250,9 +250,10 @@ export async function createResetSession(req, res) {
 
 export async function resetPassword(req, res) {
   try {
-    if (!req.app.locals.resetSession)
+    if (!req.app.locals.resetSession) {
+      console.log("Session expired");
       return res.status(440).send({ error: "Session expired" });
-
+    }
     const { username, password } = req.body;
 
     try {

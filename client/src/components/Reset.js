@@ -36,6 +36,7 @@ function Reset() {
           navigate("/password");
         })
         .catch((err) => {
+          console.log(err);
           toast.remove(toastID);
           toast.error(` Couldn't reset password`);
         });

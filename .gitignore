@@ -11,6 +11,9 @@ Backend/config.js
 .pnp.js
 .env
 
+#datasets
+/Data
+
 # testing
 /coverage
 
