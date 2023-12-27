@@ -17,13 +17,10 @@ function Register() {
 
   const [File, setFile] = useState();
 
-  const client_id =
-    "29826423338-qd1pen2u5bdrj8ft1l7kqvoh6kvmavl3.apps.googleusercontent.com";
-
   useEffect(() => {
     const start = () => {
       gapi.client.init({
-        clientId: client_id,
+        clientId: process.env.REACT_APP_GOOGLEKEY,
         scope: "profile email",
       });
     };
