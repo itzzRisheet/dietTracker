@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import avatarImg from "../assests/avatar.png";
@@ -9,11 +9,27 @@ import { RegisterValidate } from "../helper/validate";
 import convert from "../helper/imageConverter";
 import { registerUser } from "../helper/helper";
 import { useNavigate } from "react-router-dom";
+import GoogleLoginButton from "./googleLoginButton";
+import { gapi } from "gapi-script";
 
 function Register() {
   const navigate = useNavigate();
 
   const [File, setFile] = useState();
+
+  const client_id =
+    "29826423338-qd1pen2u5bdrj8ft1l7kqvoh6kvmavl3.apps.googleusercontent.com";
+
+  useEffect(() => {
+    const start = () => {
+      gapi.client.init({
+        clientId: client_id,
+        scope: "profile email",
+      });
+    };
+
+    gapi.load("client:auth2", start);
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -100,6 +116,7 @@ function Register() {
               <button className="btn" type="submit">
                 Sign in
               </button>
+              <GoogleLoginButton />
             </div>
 
             <div className="text-center py-4">

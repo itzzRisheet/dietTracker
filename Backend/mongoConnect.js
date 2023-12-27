@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
-import { MongoMemoryServer } from "mongodb-memory-server";
 import dotenv from "dotenv";
 dotenv.config();
 
-async function connect() {
+export default async function connect() {
   // to create new mongoDB server instance whenever you start server
   // const mongod = await MongoMemoryServer.create();
   // const getURI = mongod.getUri() // returns MongoDB URL
@@ -21,6 +20,9 @@ async function connect() {
     .catch((err) => {
       console.log(err);
     });
+
 }
 
-export default connect;
+
+
+
