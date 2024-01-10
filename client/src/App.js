@@ -8,8 +8,8 @@ import Recovery from "./components/Recovery";
 import Register from "./components/Register";
 import Reset from "./components/Reset";
 import Username from "./components/Username";
-import Temp from "./components/temp";
 import Home from "./components/Home";
+import Secret from "./components/secret";
 
 import { AuthorizeUser, ProtectRoute } from "./middleware/auth";
 import Features from "./components/Features";
@@ -121,12 +121,13 @@ const router = createBrowserRouter([
           </>
         ),
       },
+
       {
-        path: "/temp",
+        path: "/secretApp",
         element: (
           <>
             {" "}
-            <Temp />
+            <Secret />
           </>
         ),
       },

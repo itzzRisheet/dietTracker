@@ -47,7 +47,6 @@ export async function getUser({ username }) {
 // register the user
 export async function registerUser(credentials) {
   try {
-    console.log(axiosConfig.defaults.baseURL);
     const {
       data: { msg },
       status,
@@ -58,24 +57,43 @@ export async function registerUser(credentials) {
       },
     });
 
-    let { username, email } = credentials;
+    let { username, email, name, password, byGoogle } = credentials;
 
     // send email
     if (status === 201) {
-      await axiosConfig.post(
-        "/api/registerMail",
-        {
-          username,
-          userEmail: email,
-          text: msg,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+      if (byGoogle) {
+        await axiosConfig.post(
+          "/api/googleRegisterMail",
+          {
+            name,
+            userEmail: email,
+            text:
+              msg +
+              `Congratulations here's your temporary registered username and password !!! you can change anytime you want...\nusername : ${username}\npassword : ${password}`,
           },
-        }
-      );
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        );
+      } else {
+        await axiosConfig.post(
+          "/api/registerMail",
+          {
+            username,
+            userEmail: email,
+            text: msg,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+          }
+        );
+      }
     }
 
     return Promise.resolve(msg);

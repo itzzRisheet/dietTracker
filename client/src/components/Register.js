@@ -21,7 +21,7 @@ function Register() {
     const start = () => {
       gapi.client.init({
         clientId: process.env.REACT_APP_GOOGLEKEY,
-        scope: "profile email",
+        scope: "",
       });
     };
 
@@ -48,7 +48,6 @@ function Register() {
           navigate("/loginPage");
         })
         .catch((err) => {
-          toast.remove(toastID);
           console.log(err);
           const msg = err.error.response.data.msg;
           toast.error(msg);

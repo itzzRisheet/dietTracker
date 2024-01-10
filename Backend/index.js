@@ -7,14 +7,7 @@ import router from "./routes/route.js";
 const app = express();
 
 app.use(express.json());
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000/");
-//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-//   res.setHeader("Access-Control-Allow-Headers", [
-//     "Content-Type",
-//     "Authorization",
-//   ]);
-// });
+
 app.use(
   cors({
     origin: [
@@ -34,7 +27,7 @@ app.use(morgan("tiny")); // HTTP request logger middleware for node.js
 app.disable("x-powered-by");
 app.use("/api", router); // now all routes will goes by prefix '''/api'''
 
-const PORT = 8080 || process.env.PORT;
+const PORT = 8888 || process.env.PORT;
 
 // HTTP get request
 app.get("/", (req, res) => {

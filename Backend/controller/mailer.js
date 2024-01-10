@@ -15,7 +15,7 @@ let mailgenerator = new Mailgen({
   theme: "default",
   product: {
     name: "DietTracker Pro",
-    link: "dietTrackerPro.in",
+    link: "https://diet-tracker-client.onrender.com/",
   },
 });
 
@@ -26,6 +26,40 @@ export const registerMail = async (req, res) => {
   var email = {
     body: {
       name: username,
+      intro:
+        text ||
+        "Welcome to dietTracker app! We are happy to have you fit and healthy!!!",
+      outro:
+        "Need help , or have questions ? just mail us back on the same email we'd love to help you out ",
+    },
+  };
+
+  var emailBody = mailgenerator.generate(email);
+
+  let message = {
+    from: process.env.EMAIL,
+    to: userEmail,
+    subject: subject || "Signup Successfull",
+    html: emailBody,
+  };
+
+  transporter
+    .sendMail(message)
+    .then(() => {
+      return res.status(201).json({ msg: "Mail sent successfully" });
+    })
+    .catch((err) => {
+      res.status(500).json({ err });
+    });
+};
+
+export const gmailRegisterMail = async (req, res) => {
+  const { name, userEmail, text, subject } = req.body;
+
+  // syntax of email :
+  var email = {
+    body: {
+      name,
       intro:
         text ||
         "Welcome to dietTracker app! We are happy to have you fit and healthy!!!",

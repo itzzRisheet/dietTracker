@@ -2,16 +2,17 @@ import { Router } from "express";
 // import all controllers
 import * as controller from "../controller/appController.js";
 import auth, { localVariables } from "../Middleware/Auth.js";
-import { registerMail } from "../controller/mailer.js";
+import { gmailRegisterMail, registerMail } from "../controller/mailer.js";
 const router = Router();
 
 // POST requests
 router.route("/register").post(controller.register);
 router.route("/registerMail").post(registerMail);
-
+router.route("/googleRegisterMail").post(gmailRegisterMail);
 router.route("/authenticate").post(controller.verifyUSER, (req, res) => {
   res.end();
 });
+router.route("/delUser/:username").delete(controller.deleteUser);
 
 // it first verify the user with verifyUSER controller and then it goes to the next function
 router.route("/login").post(controller.verifyUSER, controller.login);

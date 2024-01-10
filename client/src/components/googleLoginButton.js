@@ -1,49 +1,51 @@
-// import React from "react";
-// import { GoogleLogin } from "react-google-login";
-
-// function googleLoginButton() {
-//   const onsuccess = (response, err) => {
-//     console.log(response);
-//     console.log("Login successfull", response.profileObj);
-//     // const { email, givenName, imageUrl } = response.profileObj;
-//     // const username = givenName;
-//     // const profile = imageUrl;
-//   };
-
-//   const onfailure = (response, err) => {
-//     console.log("Login attempt failed", response);
-//   };
-
-//   return (
-//     <div id="signInButton">
-//       <GoogleLogin
-//         clientId={client_id}
-//         buttonText="Login"
-//         onSuccess={onsuccess}
-//         onFailure={onfailure}
-//         cookiePolicy={"single_host_origin"}
-//         isSignedIn={true}
-//       />
-//     </div>
-//   );
-// }
-
-// export default googleLoginButton;
-
 import React from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
+import jwtDecode from "jwt-decode";
+import { registerUser } from "../helper/helper";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import generate from "../helper/passwordGenerator";
 
-function googleLoginButton() {
+function GoogleLoginButton() {
+  const navigate = useNavigate();
+
+  const onSuccess = async (credentialResponse) => {
+    console.log(jwtDecode(credentialResponse.credential));
+    const { email, given_name, picture, name } = await jwtDecode(
+      credentialResponse.credential
+    );
+    const toastID = toast.loading("Creating...");
+
+    const values = {
+      email,
+      name,
+      username: given_name,
+      password: generate(10),
+      profile: picture,
+      byGoogle: true,
+    };
+    await registerUser(values)
+      .then(() => {
+        toast.success("User registered successfully");
+        toast.remove(toastID);
+        navigate("/loginPage");
+      })
+      .catch((err) => {
+        toast.remove(toastID);
+        console.log(err);
+        const msg = err.error.response.data.msg;
+        toast.error(msg);
+      });
+  };
+
   return (
     <div>
       <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLEKEY}>
         <GoogleLogin
-          onSuccess={(credentialResponse) => {
-            console.log(credentialResponse);
-          }}
+          onSuccess={onSuccess}
           onError={() => {
-            console.log("Login Failed");
+            console.log("login failed");
           }}
         />
         ;
@@ -52,4 +54,4 @@ function googleLoginButton() {
   );
 }
 
-export default googleLoginButton;
+export default GoogleLoginButton;

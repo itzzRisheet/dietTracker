@@ -2,9 +2,6 @@ import bcrypt from "bcrypt";
 import userModel from "../model/user.model.js";
 import jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
-import { request } from "express";
-import dotenv from "dotenv";
-dotenv.config();
 
 // middleware for verifying user with JWT
 export async function verifyUSER(req, res, next) {
@@ -30,8 +27,8 @@ export async function verifyUSER(req, res, next) {
 
 export async function register(req, res) {
   try {
-    const { username, password, profile, email } = req.body;
-    console.log(username);
+    console.log(req.body);
+    const { username, password, profile, email, byGoogle } = req.body;
 
     const userPromise = new Promise(async (resolve, reject) => {
       try {
@@ -164,8 +161,7 @@ export async function getUser(req, res) {
     userModel
       .findOne({ username })
       .then((user) => {
-        if (!user)
-          return res.status(501).send({ err: err, msg: "user not found" });
+        if (!user) return res.status(501).send({ msg: "user not found" });
 
         // Here we have removed password from user object
         // also unneccessary data from use object by converting that into JSON
@@ -176,7 +172,8 @@ export async function getUser(req, res) {
         return res.status(201).send(rest);
       })
       .catch((err) => {
-        return res.status(500).send({ err: err });
+        console.log(err);
+        return res.status(500).send({ err });
       });
   } catch (error) {
     return res.status(404).send({
@@ -191,7 +188,6 @@ export async function getUser(req, res) {
 // look in Middleware folder
 export async function updateUser(req, res) {
   try {
-    // const id = req.query.id;
     const { userID } = req.user;
     if (userID) {
       const body = req.body;
@@ -290,5 +286,26 @@ export async function resetPassword(req, res) {
     }
   } catch (error) {
     return res.status(401).send({ error });
+  }
+}
+
+export async function deleteUser(req, res) {
+  const { username } = req.params;
+  try {
+    if (!username) {
+      return res.status(501).send({
+        msg: "Invalid username",
+      });
+    }
+    userModel
+      .deleteOne({ username: username })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({
+      msg: "Can not find the user",
+      error: error,
+    });
   }
 }

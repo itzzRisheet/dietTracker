@@ -1,0 +1,33 @@
+
+.UserForm{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: auto;
+    padding: 2rem;
+    height: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+input[type="text"]{
+    border-radius: 20px;
+    background-color: black;
+    color: #fff;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.btn{
+    width: 20%;
+    height: 1rem;
+    margin: 1rem;
+    transition: 0.4s;
+}
+
+.btn:hover{
+    color: cadetblue;
+    width: 25%;
+    height: 1.3rem;
+}

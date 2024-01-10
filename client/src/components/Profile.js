@@ -14,7 +14,6 @@ import { useLocalStorage } from "../store/store";
 
 function Profile() {
   const [File, setFile] = useState();
-  const [updateStatus, setupdateStatus] = useState(false);
   const setToken = useLocalStorage((state) => state.setToken);
   const navigate = useNavigate();
 
